@@ -20,10 +20,15 @@
           <td class='col-xs-2'>
             <img src='" + images[0] + "' width='150' height='150' >
           </td>
-          <td class='col-xs-10 status-text'>
+          <td class='col-xs-9 status-text'>
             <h4>
               " + text + "
             </h4>
+          </td>
+          <td class='col-xs-1 actions'>
+            <a class='btn btn-default'>
+              <i class='fa fa-print fa-lg'></i>
+            </a>
           </td>
         </tr>
       ")
