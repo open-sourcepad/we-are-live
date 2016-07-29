@@ -7,8 +7,14 @@ $ ->
 
     eventsHolder.html(null)
 
-    $.each events, (_, v) ->
-      eventsHolder.prepend("<div class='well'><h4>#" + v + "</h4></div>")
+    $.each events, (id, v) ->
+      eventsHolder.prepend("
+        <tr>
+          <td>
+            <h4><a class='event-link' href='/events/" + id + "'>#" + v.title + "</a></h4>
+          </td>
+        </tr>
+      ")
 
   fetchEvents = ->
     $.ajax(
