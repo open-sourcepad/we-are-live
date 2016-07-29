@@ -11,12 +11,18 @@ $ ->
       eventsHolder.prepend("<div class='well'>" + v + "</div>")
 
   fetchEvents = ->
+    console.log('called fetchevents')
     $.ajax(
       type: 'GET'
       url: '/events/fetch'
     ).success (resp) ->
       console.log resp
       renderEvents(resp.data)
+
+  startFetch = () ->
+    fetchEvents()
+
+    setTimeout(startFetch, 10000)
 
   $('#add-event-button').click (e) ->
     e.preventDefault()
@@ -36,4 +42,4 @@ $ ->
     input.val(null)
 
   if $('#events-holder')
-    fetchEvents()
+    startFetch()
