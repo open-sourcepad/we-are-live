@@ -108,6 +108,7 @@ ul {
 }
 
 @media print {
+  #galleryModal,
   #main-header,
   #statuses,
   #status-footer,
@@ -118,8 +119,13 @@ ul {
   #status-modal {
     height: 567px;
     width: 378px;
+    position: absolute;
+    left: 25%;
+    top: 25%;
 
     .modal-content {
+      vertical-align: middle;
+
       #print-background-image {
         z-index: -9999;
         display: block;
