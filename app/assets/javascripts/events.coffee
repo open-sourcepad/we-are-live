@@ -132,12 +132,12 @@ $ ->
   $('#galleryModal').on 'shown.bs.modal', ->
 
     settings = 
-      height: 700
-      width: 700
+      height: $(window).height()
+      width: $(window).width()
       radius: 200
-      speed: 1
-      slower: 0.5
-      timer: 10
+      speed: 0.5
+      slower: 0.2
+      timer: 20
       fontMultiplier: 15
       hoverStyle:
         border: 'none'
