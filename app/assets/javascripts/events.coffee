@@ -83,6 +83,21 @@ window.statuses = {}
   element.modal('show')
 
 $ ->
+  settings = 
+      height: $(window).height()
+      width: $(window).width()
+      radius: 200
+      speed: 0.5
+      slower: 0.2
+      timer: 1000000000000000
+      fontMultiplier: 15
+      hoverStyle:
+        border: 'none'
+        color: '#0b2e6f'
+      mouseOutStyle:
+        border: ''
+        color: ''
+
   renderEvents = (events) ->
     eventsHolder = $('#events-holder')
 
@@ -97,6 +112,7 @@ $ ->
         </tr>
       ")
 
+
   fetchEvents = ->
     $.ajax(
       type: 'GET'
@@ -108,6 +124,7 @@ $ ->
         clearTimeout(window.fetchEventsTimeOut)
 
       window.fetchEventsTimeOut = setTimeout(fetchEvents, 60000)
+
 
   $('#add-event-button').click (e) ->
     e.preventDefault()
@@ -130,22 +147,8 @@ $ ->
     fetchEvents()
 
   $('#galleryModal').on 'shown.bs.modal', ->
-
-    settings = 
-      height: $(window).height()
-      width: $(window).width()
-      radius: 200
-      speed: 0.5
-      slower: 0.2
-      timer: 20
-      fontMultiplier: 15
-      hoverStyle:
-        border: 'none'
-        color: '#0b2e6f'
-      mouseOutStyle:
-        border: ''
-        color: ''
     $('.gallery').tagoSphere settings
+
 
       
 
