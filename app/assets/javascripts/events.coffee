@@ -67,14 +67,9 @@ window.statuses = {}
 
   header.html("<h2 class='modal-title'>#" + hashtag + "</h2>")
 
-  html = "<div class='container-fluid'>"
-
-  $.each images, (_, src) ->
-    html += "<div class='col-xs-" + 12/totalImage + "'>
-      <img src=" + src + " width='100%' />
-    </div>"
-
-  html += "</div>"
+  html = "<div class='container-fluid'>
+            <img src=" + images[0] + " width='100%' />
+          </div>"
 
   html += "<div class='centered'><h4>" + data.text + "</h4></div>"
 
