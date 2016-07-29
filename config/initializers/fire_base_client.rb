@@ -8,6 +8,6 @@ class FireBaseClient
     ENV['firebase_secret_key']
   end
   def base
-    ENV['firebase_databse_url']
+    ENV['firebase_database_url']
   end
 end
