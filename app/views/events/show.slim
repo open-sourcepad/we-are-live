@@ -7,11 +7,17 @@ h2.page-header
 table.table.table-striped.table-hover#statuses
   tbody#statuses-holder
 
+
 #galleryModal.modal.fade.modal-lg role="dialog" tabindex="-1" 
   .modal-dialog role="document"
     div.gallery
 			ul.galleryList
 
+.modal.fade id="status-modal" role='dialog'
+  .modal-dialog role='document'
+    .modal-content
+      #status-header.modal-header
+      #status-modal-holder.modal-body
 
 
 - content_for :additional_stuff do

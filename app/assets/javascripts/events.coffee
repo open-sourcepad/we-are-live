@@ -1,6 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+window.statuses = {}
 
 @beginSearch = (id, hashtag) ->
   $.ajax(
@@ -8,6 +9,7 @@
     url: '/events/statuses'
     data: { id: id, hashtag: hashtag }
   ).success (resp) ->
+    window.statuses = resp.data
     statusesHolder = $('#statuses-holder')
     galleryList = $('.galleryList')
     statusesHolder.html(null)
@@ -22,10 +24,15 @@
           <td class='col-xs-2'>
             <img src='" + images[0] + "' width='150' height='150' >
           </td>
-          <td class='col-xs-10 status-text'>
+          <td class='col-xs-9 status-text'>
             <h4>
               " + text + "
             </h4>
+          </td>
+          <td class='col-xs-1 actions'>
+            <a class='btn btn-default view-status' href='#' onClick='openModal(\"" + id + "\", \"" + hashtag + "\")'>
+              <i class='fa fa-eye fa-lg'></i>
+            </a>
           </td>
         </tr>
       ")
@@ -48,6 +55,32 @@
     clearTimeout(window.fetchStatusesTimeOut)
 
   window.fetchStatusesTimeOut = setTimeout(beginSearch, 60000, id, hashtag)
+
+@openModal = (id, hashtag) ->
+  element = $('#status-modal')
+  header = $('#status-header')
+  holder = $('#status-modal-holder')
+  data = statuses[id]
+  images = data.images
+  totalImage = images.length
+
+
+  header.html("<h2 class='modal-title'>#" + hashtag + "</h2>")
+
+  html = "<div class='container-fluid'>"
+
+  $.each images, (_, src) ->
+    html += "<div class='col-xs-" + 12/totalImage + "'>
+      <img src=" + src + " width='100%' />
+    </div>"
+
+  html += "</div>"
+
+  html += "<div class='centered'><h4>" + data.text + "</h4></div>"
+
+  holder.html(html)
+
+  element.modal('show')
 
 $ ->
   renderEvents = (events) ->
@@ -75,7 +108,6 @@ $ ->
         clearTimeout(window.fetchEventsTimeOut)
 
       window.fetchEventsTimeOut = setTimeout(fetchEvents, 60000)
-
 
   $('#add-event-button').click (e) ->
     e.preventDefault()
