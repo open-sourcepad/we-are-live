@@ -9,11 +9,15 @@ table.table.table-striped.table-hover#statuses
 
 
 #galleryModal.modal.fade.modal-lg role="dialog" tabindex="-1" 
-  .modal-dialog role="document"
+  .modal-dialog role="document" style="margin: 0px; padding: 0px;"
+  	.pull-right
+  		button.close.close-dialog data-dismiss="modal" aria-label="Close"  
+  			span aria-hidden="true"
+  				| &times;
   	div.gallery
 			ul.galleryList
 
-.modal.fade id="status-modal" role='dialog'
+.modal.fade id="status-modal" role='dialog' 
   .modal-dialog role='document'
     .modal-content
       #status-header.modal-header
@@ -23,3 +27,7 @@ table.table.table-striped.table-hover#statuses
 - content_for :additional_stuff do
   = javascript_tag do
     | beginSearch('#{ @id }', '#{ @header }')
+
+
+<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
