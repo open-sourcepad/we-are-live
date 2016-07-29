@@ -1,6 +1,16 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+@beginSearch = (id, hashtag) ->
+  $.ajax(
+    type: 'GET'
+    url: '/events/statuses'
+    data: { id: id, hashtag: hashtag }
+  ).success (resp) ->
+    console.log 'resp'
+    console.log(resp)
+
 $ ->
   renderEvents = (events) ->
     eventsHolder = $('#events-holder')
@@ -46,5 +56,5 @@ $ ->
 
     input.val(null)
 
-  if $('#events-holder')
+  if $('#events-holder').size() > 0
     startFetch()

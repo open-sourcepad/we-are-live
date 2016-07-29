@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :show, :create] do
     collection do
       get :fetch
+      get :statuses
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

@@ -3,6 +3,10 @@ class EventsController < ApplicationController
   end
 
   def show
+    path = "events/#{ params[:id] }"
+    event = firebase.get(path)
+    @id = params[:id]
+    @header = "#{ event.body['title'] }"
   end
 
   def create
@@ -30,5 +34,28 @@ class EventsController < ApplicationController
     data = events.body || []
 
     render json: { success: true, data: data }, status: 200
+  end
+
+  def statuses
+    event_path = "events/#{ params[:id] }"
+    resp = twitter_service.search(params[:hashtag])
+    data = []
+
+    resp.each do |status|
+      data << {
+        id: status['id'],
+        text: status['text'].gsub("\n", ' '),
+        images: resp.first['entities']['media'].collect{ |m| m['media_url']  }
+      }
+    end
+
+    firebase.update(event_path, { data: data })
+
+    render json: { success: true, data: data }, status: 200
+  end
+
+  private
+  def twitter_service
+    @twitter_service ||= TwitterService.new
   end
 end
