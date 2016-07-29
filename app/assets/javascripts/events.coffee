@@ -11,7 +11,9 @@ window.statuses = {}
   ).success (resp) ->
     window.statuses = resp.data
     statusesHolder = $('#statuses-holder')
+    galleryList = $('.galleryList')
     statusesHolder.html(null)
+    galleryList.html(null)
 
     $.each resp.data, (id, data) ->
       images = data.images
@@ -34,6 +36,20 @@ window.statuses = {}
           </td>
         </tr>
       ")
+      galleryList.append("
+        <li>
+          <div>
+            <a>
+              <img class='pix' src=" + images[0] + ">
+              <div class='pixDesc'>
+                " + text + "
+              </div>
+            </a>
+
+          </div>
+        </li>
+      ")
+
 
   if window.fetchStatusesTimeOut != undefined
     clearTimeout(window.fetchStatusesTimeOut)
@@ -112,3 +128,34 @@ $ ->
 
   if $('#events-holder').size() > 0
     fetchEvents()
+
+  $('#galleryModal').on 'shown.bs.modal', ->
+
+    settings = 
+      height: $(window).height()
+      width: $(window).width()
+      radius: 200
+      speed: 0.5
+      slower: 0.2
+      timer: 20
+      fontMultiplier: 15
+      hoverStyle:
+        border: 'none'
+        color: '#0b2e6f'
+      mouseOutStyle:
+        border: ''
+        color: ''
+    $('.gallery').tagoSphere settings
+
+      
+
+
+
+
+
+
+  
+
+
+      
+    
