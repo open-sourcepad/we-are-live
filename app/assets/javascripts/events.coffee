@@ -8,8 +8,30 @@
     url: '/events/statuses'
     data: { id: id, hashtag: hashtag }
   ).success (resp) ->
-    console.log 'resp'
-    console.log(resp)
+    statusesHolder = $('#statuses-holder')
+    statusesHolder.html(null)
+
+    $.each resp.data, (id, data) ->
+      images = data.images
+      text = data.text
+
+      statusesHolder.append("
+        <tr>
+          <td class='col-xs-2'>
+            <img src='" + images[0] + "' width='150' height='150' >
+          </td>
+          <td class='col-xs-10 status-text'>
+            <h4>
+              " + text + "
+            </h4>
+          </td>
+        </tr>
+      ")
+
+  if window.fetchStatusesTimeOut != undefined
+    clearTimeout(window.fetchStatusesTimeOut)
+
+  window.fetchStatusesTimeOut = setTimeout(beginSearch, 60000, id, hashtag)
 
 $ ->
   renderEvents = (events) ->
@@ -31,13 +53,13 @@ $ ->
       type: 'GET'
       url: '/events/fetch'
     ).success (resp) ->
-      console.log resp
       renderEvents(resp.data)
 
-  startFetch = () ->
-    fetchEvents()
+      if window.fetchEventsTimeOut != undefined
+        clearTimeout(window.fetchEventsTimeOut)
 
-    setTimeout(startFetch, 60000)
+      window.fetchEventsTimeOut = setTimeout(fetchEvents, 60000)
+
 
   $('#add-event-button').click (e) ->
     e.preventDefault()
@@ -57,4 +79,4 @@ $ ->
     input.val(null)
 
   if $('#events-holder').size() > 0
-    startFetch()
+    fetchEvents()

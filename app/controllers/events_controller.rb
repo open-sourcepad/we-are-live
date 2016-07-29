@@ -39,13 +39,12 @@ class EventsController < ApplicationController
   def statuses
     event_path = "events/#{ params[:id] }"
     resp = twitter_service.search(params[:hashtag])
-    data = []
+    data = {}
 
     resp.each do |status|
-      data << {
-        id: status['id'],
+      data[status['id']] = {
         text: status['text'].gsub("\n", ' '),
-        images: resp.first['entities']['media'].collect{ |m| m['media_url']  }
+        images: status['entities']['media'].collect{ |m| m['media_url']  }
       }
     end
 
