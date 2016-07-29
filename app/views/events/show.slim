@@ -1,2 +1,18 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+h2.page-header
+  | #
+  = @header
+  .pull-right.form-inline
+    .input-group
+      .input-group-addon #
+      input.form-control type='text' placeholder="WaLSPHackathon2016" id="new-event-input"
+    = link_to '#', class: 'btn btn-primary', id: 'add-event-button' do
+      i.fa.fa-plus-circle.fa-lg
+      | &nbsp;
+      | Add new event
+
+table.table.table-striped.table-hover#statuses
+  tbody#statuses-holder
+
+- content_for :additional_stuff do
+  = javascript_tag do
+    | beginSearch('#{ @id }', '#{ @header }')

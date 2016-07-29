@@ -4,6 +4,7 @@ html
     title We are Live
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
+    = yield :additional_stuff
     = csrf_meta_tags
   body
     #header.container-fluid
