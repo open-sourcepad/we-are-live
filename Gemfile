@@ -35,6 +35,7 @@ gem 'firebase'
 gem 'figaro'
 gem 'httparty'
 gem 'twitter-bootstrap-rails'
+gem 'slim-rails'
 
 group :development, :test do
   gem 'pry'

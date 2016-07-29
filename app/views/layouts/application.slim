@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title We are Live
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  body
+    #header.container-fluid
+      .brand.col-xs-1
+        h1
+          = link_to root_path do
+            span.strong W
+            span.red a
+            span.strong L
+
+    .container
+      = yield
