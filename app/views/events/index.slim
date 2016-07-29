@@ -1,2 +1,12 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+h1
+  | Events
+  .pull-right.form-inline
+    .input-group
+      .input-group-addon #
+      input.form-control type='text' placeholder="WaLSPHackathon2016" id="new-event-input"
+    = link_to '#', class: 'btn btn-primary', id: 'add-event-button' do
+      i.fa.fa-plus-circle.fa-lg
+      | &nbsp;
+      | Add new event
+
+#events-holder
