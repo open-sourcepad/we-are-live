@@ -8,10 +8,9 @@ $ ->
     eventsHolder.html(null)
 
     $.each events, (_, v) ->
-      eventsHolder.prepend("<div class='well'>" + v + "</div>")
+      eventsHolder.prepend("<div class='well'><h4>#" + v + "</h4></div>")
 
   fetchEvents = ->
-    console.log('called fetchevents')
     $.ajax(
       type: 'GET'
       url: '/events/fetch'
@@ -22,7 +21,7 @@ $ ->
   startFetch = () ->
     fetchEvents()
 
-    setTimeout(startFetch, 10000)
+    setTimeout(startFetch, 60000)
 
   $('#add-event-button').click (e) ->
     e.preventDefault()

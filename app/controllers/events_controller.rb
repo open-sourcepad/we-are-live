@@ -7,7 +7,12 @@ class EventsController < ApplicationController
 
   def create
     events = firebase.get('events')
-    titles = events.body.values.collect{|v| v['title']}
+
+    if events.body.blank?
+      titles = []
+    else
+      titles = events.body.values.collect{|v| v['title']}
+    end
 
     if titles.include?(params[:hashtag])
       render json: { success: false, error: { message: 'Event already exsists' } }, status: 403
@@ -21,7 +26,13 @@ class EventsController < ApplicationController
   end
 
   def fetch
-    data = firebase.get('events').body.values.collect{ |v| v['title'] }
+    events = firebase.get('events')
+
+    if events.body.blank?
+      data = []
+    else
+      data = events.body.values.collect{|v| v['title']}
+    end
 
     render json: { success: true, data: data }, status: 200
   end
