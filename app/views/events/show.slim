@@ -16,9 +16,12 @@ table.table.table-striped.table-hover#statuses
 .modal.fade id="status-modal" role='dialog'
   .modal-dialog role='document'
     .modal-content
+      img id="print-background-image" src="#{ image_url('print-background') }" height="100%" width="100%"
       #status-header.modal-header
       #status-modal-holder.modal-body
-
+      #status-footer.modal-footer
+        a.btn.btn-primary href='#' onClick='window.print(); return false;'
+          | Print
 
 - content_for :additional_stuff do
   = javascript_tag do

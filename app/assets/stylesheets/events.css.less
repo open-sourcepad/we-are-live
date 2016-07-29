@@ -1,7 +1,7 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Less here: http://lesscss.org/
-#header {
+#main-header {
   padding: 15px;
   background-color: #202020;
   color: #FFFFFF;
@@ -41,6 +41,10 @@
 
 #status-modal {
   .modal-content {
+    #print-background-image {
+      display: none;
+    }
+
     background-image: image-url('modal-pattern.jpg');
     background-repeat: repeat;
     color: #202020;
@@ -66,4 +70,33 @@ a.event-link {
 
 .centered {
   text-align: center;
+}
+
+@media print {
+  #main-header,
+  #statuses,
+  #status-footer,
+  .page-header {
+    display: none;
+  }
+
+  #status-modal {
+    height: 576px;
+    width: 384px;
+
+    .modal-content {
+      #print-background-image {
+        z-index: -9999;
+        display: block;
+        position: absolute;
+        border: none;
+      }
+
+      color: #202020;
+
+      img {
+        border: 10px solid #202020;
+      }
+    }
+  }
 }
