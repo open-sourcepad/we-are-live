@@ -2,16 +2,17 @@ h2.page-header
   | #
   = @header
   .pull-right.form-inline
-    .input-group
-      .input-group-addon #
-      input.form-control type='text' placeholder="WaLSPHackathon2016" id="new-event-input"
-    = link_to '#', class: 'btn btn-primary', id: 'add-event-button' do
-      i.fa.fa-plus-circle.fa-lg
-      | &nbsp;
-      | Add new event
+    button.btn.btn-primary.btn-sm data-target="#galleryModal" data-toggle="modal" type="button" Go Live
 
 table.table.table-striped.table-hover#statuses
   tbody#statuses-holder
+
+#galleryModal.modal.fade.modal-lg role="dialog" tabindex="-1" 
+  .modal-dialog role="document"
+    div.gallery
+			ul.galleryList
+
+
 
 - content_for :additional_stuff do
   = javascript_tag do

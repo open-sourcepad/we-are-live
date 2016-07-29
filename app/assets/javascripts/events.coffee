@@ -9,7 +9,9 @@
     data: { id: id, hashtag: hashtag }
   ).success (resp) ->
     statusesHolder = $('#statuses-holder')
+    galleryList = $('.galleryList')
     statusesHolder.html(null)
+    galleryList.html(null)
 
     $.each resp.data, (id, data) ->
       images = data.images
@@ -27,6 +29,20 @@
           </td>
         </tr>
       ")
+      galleryList.append("
+        <li>
+          <div>
+            <a>
+              <img class='pix' src=" + images[0] + ">
+              <div class='pixDesc'>
+                " + text + "
+              </div>
+            </a>
+
+          </div>
+        </li>
+      ")
+
 
   if window.fetchStatusesTimeOut != undefined
     clearTimeout(window.fetchStatusesTimeOut)
@@ -82,8 +98,28 @@ $ ->
     fetchEvents()
 
   $('#galleryModal').on 'shown.bs.modal', ->
-      $('.gallery').tagcloud({centrex:250, centrey:250, init_motion_x:10, init_motion_y:10, fps: 120, max_zoom: 500, zoom: 130, random_points: 100})
-    
+
+    settings = 
+      height: 700
+      width: 700
+      radius: 200
+      speed: 1
+      slower: 0.5
+      timer: 10
+      fontMultiplier: 15
+      hoverStyle:
+        border: 'none'
+        color: '#0b2e6f'
+      mouseOutStyle:
+        border: ''
+        color: ''
+    $('.gallery').tagoSphere settings
+
+      
+
+
+
+
 
 
   
